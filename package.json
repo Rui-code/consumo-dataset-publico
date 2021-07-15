@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev2": "node --trace-warnings index.js"
   },
   "keywords": [],
@@ -17,5 +17,8 @@
   },
   "engines": {
     "node": "14.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
