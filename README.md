@@ -8,5 +8,5 @@ $ npm install
 $ npm run start
 ```
 ## Faça uma requisição na url:
-- http://localhost:3000/dsk?data_inicio=**_data-inicio_**&&data_fim=**_data-fim_**
+- http://localhost:3000/dsk?data_inicio=data-inicio&&data_fim=data-fim
 ## Aguarde o fetch dos dados, criação e download do arquivo
