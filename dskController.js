@@ -4,8 +4,12 @@ const path = require('path');
 
 const dskController = {
 
+    // url -> http://localhost:3000/dsk?data_inicio=2021-08-01&&data_fim=2021-08-31
     index: async (req, res) => {
         let data = '';
+
+        let data_inicio = String(req.query.data_inicio);
+        let data_fim = String(req.query.data_fim);
 
         try {
             console.log('Removendo arquivo...');
@@ -15,7 +19,9 @@ const dskController = {
         }
 
         try {
-            data = String(await publicDataset.getDataset("dsk_indica_obras", [], [], []));
+            data = String(await publicDataset.getDataset("dsk_indica_obras", [], [
+                publicDataset.createConstraint('data_inicio', data_inicio, data_fim, publicDataset.ConstraintType.MUST, false),
+            ], []));
         } catch (error) {
             console.log(`Erro ao buscar os dados.`);
         }

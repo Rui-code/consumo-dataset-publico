@@ -1,6 +1,4 @@
 const OAuth = require('OAuth');
-const fs = require('fs');
-const keys = require('./keys');
 
 const publicDataset = {
 
@@ -12,21 +10,21 @@ const publicDataset = {
 
     retornaToken: function () {
         let token = {
-            'public': keys.token.PUBLIC,
-            'secret': keys.token.SECRET,
+            'public': process.env.TOKEN_PUBLIC,
+            'secret': process.env.TOKEN_SECRET,
         };
         return token;
     },
 
     retornaOauth: function () {
         let consumer = {
-            'public': keys.consumer.PUBLIC,
-            'secret': keys.consumer.SECRET,
+            'public': process.env.CONSUMER_PUBLIC,
+            'secret': process.env.CONSUMER_SECRET,
         };
 
         let oauth = new OAuth.OAuth(
-            'http://fluig.pormade.com.br:8080/portal/api/rest/oauth/request_token',
-            'http://fluig.pormade.com.br:8080/portal/api/rest/oauth/access_token',
+            process.env.REQUEST_TOKEN_URL,
+            process.env.ACCESS_TOKEN_URL,
             consumer.public,
             consumer.secret,
             1.0,
@@ -55,13 +53,15 @@ const publicDataset = {
                 fields,
                 constraints,
                 order
-            });
+            }, null, 2);
 
             const token = this.retornaToken();
             const oauth = this.retornaOauth();
 
+            console.log(corpo);
+
             oauth.post(
-                'http://fluig.pormade.com.br:8080/api/public/ecm/dataset/datasets',
+                process.env.URL,
                 token.public,
                 token.secret,
                 corpo,
